@@ -9,4 +9,5 @@ addButton.addEventListener("click", function() {
     newTask.innerText = input.value;
     tasks.appendChild(newTask);
     input.value = "";
-})
+});
+
