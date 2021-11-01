@@ -1,0 +1,20 @@
+body {
+  background-color: D9E5E0;
+  padding-top: 3rem;
+}
+
+li {
+  margin-top: 1rem;
+  list-style-type: none;
+}
+
+p {
+  display: inline-block;
+  margin: 0 1rem;
+}
+
+.iframe-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 5rem;
+}
