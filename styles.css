@@ -1,6 +1,12 @@
 body {
-  background-color: D9E5E0;
+  background-color: #D9E5E0;
   padding-top: 3rem;
+}
+
+#tasks-container {
+  border: solid #285d3d;
+  border-radius: 1rem;
+  box-shadow: 1rem 1rem #31724b;
 }
 
 li {
