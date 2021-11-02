@@ -13,6 +13,9 @@ const getFromLocalStorage = () => {
     <button class="btn btn-danger" name="delete">Delete</button>
     <button class="btn btn-warning" name="edit">Edit</button>
     `;
+    if (todo.done === true) {
+      listItem.children[1].style.textDecoration = "line-through red";
+    }
     taskList.append(listItem);
   });
 };
@@ -47,6 +50,7 @@ const addNewTask = (task) => {
   const todo = {
     id: Date.now(),
     name: task,
+    done: false,
   };
 
   listItem.innerHTML = `
@@ -73,8 +77,8 @@ const deleteTask = (event) => {
   task.remove();
 };
 
+//Delete to do from localStorage
 const deleteFromLocalStorage = (todos, task) => {
-  console.log(todos);
   const findTaskIndex = todos.findIndex(
     (todo) => todo.name == task.childNodes[3].innerHTML
   );
@@ -84,9 +88,32 @@ const deleteFromLocalStorage = (todos, task) => {
 
 //Edit to do in DOM
 const editTask = (event) => {
-  const input = event.target.parentNode.childNodes[2].nextSibling;
-  input.contentEditable = true;
-  input.focus();
+  const paragraph = event.target.parentNode.childNodes[2].nextSibling;
+  const newInputField = document.createElement("input");
+  newInputField.setAttribute("type", "text");
+  const doneButton = document.createElement("button");
+  doneButton.innerHTML = "Done";
+  doneButton.setAttribute("class", "btn btn-success");
+  paragraph.append(newInputField);
+  paragraph.append(doneButton);
+//   const replaceP = (event) => {
+//     console.log(paragraph);
+//     console.log(todos)
+//     const findTaskIndex = todos.findIndex(
+//       (todo) => todo.name == paragraph.innerText
+//     );
+//     console.log(findTaskIndex);
+//     paragraph.innerHTML = event.target.previousSibling.value;
+//     editTaskLocalStorage(todos, findTaskIndex, paragraph);
+//   };
+//   doneButton.addEventListener("click", replaceP);
+};
+
+//Edit to do in localStorage
+const editTaskLocalStorage = (todos, findTaskIndex, paragraph) => {
+//   console.log(paragraph);
+//   console.log(todos);
+//   console.log(findTaskIndex);
 };
 
 //Mark to do as done in DOM
@@ -97,6 +124,16 @@ const markAsDone = (event) => {
   } else {
     task.style.textDecoration = "line-through red";
   }
+  markAsDoneLocalStorage(todos, task);
+};
+
+//Mark to do as done in localStorage
+const markAsDoneLocalStorage = (todos, task) => {
+  const findTaskIndex = todos.findIndex(
+    (todo) => todo.name == task.innerHTML
+  );
+  todos[findTaskIndex].done = true;
+  addToLocalStorage();
 };
 
 //Event listeners
