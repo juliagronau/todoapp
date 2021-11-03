@@ -15,6 +15,7 @@ const getFromLocalStorage = () => {
     `;
     if (todo.done === true) {
       listItem.children[1].style.textDecoration = "line-through red";
+      listItem.children[0].setAttribute("checked", "true");
     }
     taskList.append(listItem);
   });
@@ -91,8 +92,10 @@ const editTask = (event) => {
   const paragraph = event.target.parentNode.childNodes[2].nextSibling;
   const newInputField = document.createElement("input");
   newInputField.setAttribute("type", "text");
+  newInputField.setAttribute("id", "edit-input")
   const doneButton = document.createElement("i");
   doneButton.setAttribute("class", "bi bi-check-square");
+  doneButton.setAttribute("style", "font-size: 1.5rem");
   paragraph.appendChild(newInputField);
   paragraph.appendChild(doneButton);
   const replaceP = (event) => {
@@ -127,7 +130,11 @@ const markAsDoneLocalStorage = (todos, task) => {
   const findTaskIndex = todos.findIndex(
     (todo) => todo.name == task.innerHTML
   );
-  todos[findTaskIndex].done = true;
+  if (todos[findTaskIndex].done == false) {
+    todos[findTaskIndex].done = true;
+  } else {
+    todos[findTaskIndex].done = false;
+  }
   addToLocalStorage();
 };
 
