@@ -91,29 +91,24 @@ const editTask = (event) => {
   const paragraph = event.target.parentNode.childNodes[2].nextSibling;
   const newInputField = document.createElement("input");
   newInputField.setAttribute("type", "text");
-  const doneButton = document.createElement("button");
-  doneButton.innerHTML = "Done";
-  doneButton.setAttribute("class", "btn btn-success");
-  paragraph.append(newInputField);
-  paragraph.append(doneButton);
-//   const replaceP = (event) => {
-//     console.log(paragraph);
-//     console.log(todos)
-//     const findTaskIndex = todos.findIndex(
-//       (todo) => todo.name == paragraph.innerText
-//     );
-//     console.log(findTaskIndex);
-//     paragraph.innerHTML = event.target.previousSibling.value;
-//     editTaskLocalStorage(todos, findTaskIndex, paragraph);
-//   };
-//   doneButton.addEventListener("click", replaceP);
+  const doneButton = document.createElement("i");
+  doneButton.setAttribute("class", "bi bi-check-square");
+  paragraph.appendChild(newInputField);
+  paragraph.appendChild(doneButton);
+  const replaceP = (event) => {
+    const findTaskIndex = todos.findIndex(
+      (todo) => todo.name == paragraph.innerText
+    );
+    paragraph.innerHTML = event.target.previousSibling.value;
+    editTaskLocalStorage(todos, findTaskIndex, paragraph);
+  };
+  doneButton.addEventListener("click", replaceP);
 };
 
 //Edit to do in localStorage
 const editTaskLocalStorage = (todos, findTaskIndex, paragraph) => {
-//   console.log(paragraph);
-//   console.log(todos);
-//   console.log(findTaskIndex);
+  todos[findTaskIndex].name = paragraph.innerHTML;
+  addToLocalStorage();
 };
 
 //Mark to do as done in DOM
