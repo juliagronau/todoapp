@@ -63,7 +63,7 @@ const addNewTask = (task) => {
 
   taskList.append(listItem);
   todos.push(todo);
-  addToLocalStorage(todo);
+  addToLocalStorage();
 };
 //Add new to do to localStorage
 const addToLocalStorage = () => {
@@ -92,7 +92,7 @@ const editTask = (event) => {
   const paragraph = event.target.parentNode.childNodes[2].nextSibling;
   const newInputField = document.createElement("input");
   newInputField.setAttribute("type", "text");
-  newInputField.setAttribute("id", "edit-input")
+  newInputField.setAttribute("id", "edit-input");
   const doneButton = document.createElement("i");
   doneButton.setAttribute("class", "bi bi-check-square");
   doneButton.setAttribute("style", "font-size: 1.5rem");
